@@ -1,0 +1,40 @@
+{
+  "summary": {
+    "total_issues": 2,
+    "high": 2,
+    "medium": 0,
+    "low": 0
+  },
+  "details": [
+    {
+      "id": 1,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "maxRetries",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "Range: 0–10; Default: 1",
+      "actual_value": "Range enforced in code: 1–5; Default assigned in code: 3",
+      "citations": {
+        "doc": "README.md lines 7-11",
+        "code": "input.ts lines 15, 18-20"
+      },
+      "fix_summary": "Update README to state Range 1–5 and Default 3; update example to use valid value (e.g., maxRetries:3)."
+    },
+    {
+      "id": 2,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "backoffMs",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "Default: 100 (no minimum documented)",
+      "actual_value": "Default assigned in code: 1000; Minimum enforced: 500 (values <500 cause error)",
+      "citations": {
+        "doc": "README.md lines 13-16 and example lines 21-24",
+        "code": "input.ts lines 16, 22-24"
+      },
+      "fix_summary": "Update README to state Default 1000 and Minimum 500; update example to use valid value (e.g., backoffMs:1000)."
+    }
+  ]
+}
