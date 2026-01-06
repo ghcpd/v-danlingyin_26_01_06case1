@@ -1,0 +1,220 @@
+oswe-mini-secondary    ：：
+User: Prompt —Documentation & Knowledge (Incorrect Docs)
+You are a senior software engineer and technical documentation auditor.
+Your task is to identify incorrect documentation, where documented parameters, value ranges, defaults, or usage rules do NOT match the actual implementation in code.
+--------------------------------------------------------------------------------
+Your Responsibilities:
+1.Identify Incorrect Documentation
+- Review all provided documentation files (e.g. README.md)
+- Review the corresponding source code files
+- Identify factual inconsistencies, including but not limited to:
+- Incorrect parameter description
+- Incorrect value range
+- Incorrect default value
+- Missing constraints that are enforced in code
+- Examples that appear valid but fail at runtime
+For each issue, you MUST list:
+- Documentation file name
+- Section or heading
+- Parameter name (if applicable)
+- What the documentation claims
+- What the code actually enforces
+--------------------------------------------------------------------------------
+2.Provide Mandatory Citation Evidence For EVERY issue, you MUST provide:
+- Documentation citation:
+- File name + section heading or quoted text
+- Code citation:
+- File name + exact line numbers
+- Explanation of enforcement logic
+--------------------------------------------------------------------------------
+3.Severity Classification Classify each issue as:
+- High: Leads to runtime errors or invalid usage
+- Medium: Misleading behavior but still works in some cases
+- Low: Minor but technically incorrect documentation
+--------------------------------------------------------------------------------
+4.Produce Corrected Documentation Generate:
+- README_backup.md → exact, unchanged copy of original documentation
+- README.md → corrected documentation that matches the code EXACTLY
+Rules:
+- ❌ Do NOT modify source code
+- ✅ Only documentation may be updated
+- ✅ All constraints, defaults, and ranges must be precise and explicit
+--------------------------------------------------------------------------------
+5.Generate Incorrect Documentation Report Generate report.json using the structure below: 
+{
+  "summary": {
+    "total_issues": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "details": [
+    {
+      "id": 1,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "maxRetries",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "",
+      "actual_value": "",
+      "citations": {
+        "doc": "",
+        "code": ""
+      },
+      "fix_summary": ""
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+6.Generate Citation Evidence File Produce citations.md containing:
+- Side-by-side comparison of:
+- Documentation statement
+- Code behavior
+- Explicit explanation of why the documentation is incorrect
+- Exact references used
+--------------------------------------------------------------------------------
+7.Generate Audit README Produce AUDIT_README.md explaining:
+- Scope of audit
+- Types of documentation errors found
+- How citations were derived
+- How reviewers can manually verify correctness
+--------------------------------------------------------------------------------
+📌 Strict Rules for the Model
+- MUST NOT hallucinate parameters not present in code
+- MUST NOT invent files that do not exist
+- MUST provide exact citations (file + line numbers or quoted text)
+- MUST NOT modify source code
+- MUST keep output structured, concise, and verifiable
+- MUST base all conclusions strictly on provided files
+
+GitHub Copilot: Proceeding to start the audit: I'll create a short plan and then review README.md and input.ts for mismatches.
+
+Created 8 todos
+
+Read [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-secondary/README.md)
+
+Read [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-secondary/input.ts)
+
+Great! I found mismatches in defaults and allowed ranges for `maxRetries` and `backoffMs` in the README vs input.ts. My next step is to compile exact citations and list each issue with severity.
+
+Starting: *Compile issues and gather citations* (2/8)
+
+Proceeding to mark the review step done and start creating documentation files (backup + corrected files).
+
+Starting: *Create `README_backup.md`* (3/8)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-secondary/README_backup.md)
+
+Starting: *Update `README.md` to match code* (4/8)
+
+Using "Apply Patch"
+
+
+```
+
+```
+
+
+Starting: *Create `report.json`* (5/8)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-secondary/report.json)
+
+Starting: *Create `citations.md`* (6/8)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-secondary/citations.md)
+
+Starting: *Create `AUDIT_README.md`* (7/8)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-secondary/AUDIT_README.md)
+
+Starting: *Final wrap-up and deliverables* (8/8)
+
+Completed: *Final wrap-up and deliverables* (8/8)
+
+Perfect! The documentation inconsistencies are fixed and all deliverables are produced (backup, corrected README, report, citations, and audit README). Next step: you can review the files below — I list the issues, exact citations, and where to find each generated file.
+
+## Summary of Findings ✅
+
+- Total issues found: **3** (all **High** severity)
+  1. `maxRetries` documented range and default are incorrect.
+  2. `backoffMs` documented default (and missing minimum) is incorrect.
+  3. README example uses values that will throw at runtime.
+
+---
+
+## Detailed Issues (concise) 🔍
+
+1) Issue: maxRetries — Incorrect range & default (High)
+- Documentation: README.md (Configuration -> `maxRetries`)
+  - Documented: "Range: 0–10" and "Default: 1"
+  - Location: README.md lines 7–11
+- Code: input.ts
+  - Actual default: `const maxRetries = options?.maxRetries ?? 3;` (line 15)
+  - Enforcement: `if (maxRetries < 1 || maxRetries > 5) { throw new Error("maxRetries must be between 1 and 5"); }` (lines 18–19)
+- Explanation: Default is 3; allowed range is 1–5. A documented `maxRetries: 0` will throw at runtime.
+- Severity: High
+
+2) Issue: backoffMs — Incorrect default and missing minimum (High)
+- Documentation: README.md (Configuration -> `backoffMs`)
+  - Documented: "Default: 100" (lines 13–16)
+- Code: input.ts
+  - Actual default: `const backoffMs = options?.backoffMs ?? 1000;` (line 16)
+  - Enforcement: `if (backoffMs < 500) { throw new Error("backoffMs must be at least 500ms"); }` (lines 22–23)
+- Explanation: Default is 1000ms and minimum allowed is 500ms. Documented `backoffMs: 100` will throw.
+- Severity: High
+
+3) Issue: Example uses invalid values (High)
+- Documentation: README.md Example (lines 21–24): `maxRetries: 0, backoffMs: 100`
+- Code: input.ts enforces the constraints noted above (lines 18–19 and 22–23).
+- Explanation: Both values in the example violate runtime checks and will cause the function to throw.
+- Severity: High
+
+---
+
+## Deliverables created (files added/updated) 🔧
+
+- README_backup.md — Exact untouched copy of original README.md.
+- README.md — Updated to match code **exactly**:
+  - `maxRetries`: Range **1–5**, Default **3**, clarified behavior (1 = no retries).
+  - `backoffMs`: Default **1000**, Minimum **500** ms.
+  - Example replaced with valid values.
+- report.json — Structured report listing all issues, severities, citations, and fixes.
+- citations.md — Side-by-side evidence for each issue (documentation vs code) with quoted lines and explanations.
+- AUDIT_README.md — Short guide describing scope, types of errors found, how citations were derived, and verification steps.
+
+Files were created/updated in:
+- oswe-mini-secondary
+
+---
+
+## Exact Code Citations (quick reference) 📚
+
+- Default and checks:
+  - input.ts line 15: const maxRetries = options?.maxRetries ?? 3;
+  - input.ts lines 18–19: if (maxRetries < 1 || maxRetries > 5) { throw new Error("maxRetries must be between 1 and 5"); }
+  - input.ts line 16: const backoffMs = options?.backoffMs ?? 1000;
+  - input.ts lines 22–23: if (backoffMs < 500) { throw new Error("backoffMs must be at least 500ms"); }
+
+- README original problematic lines (now in README_backup.md):
+  - `maxRetries` block: lines 7–11 (Range: 0–10, Default: 1)
+  - `backoffMs` block: lines 13–16 (Default: 100)
+  - Example: lines 21–24 (maxRetries: 0, backoffMs: 100)
+
+---
+
+## How you can verify (quick steps) ✔️
+1. Inspect input.ts lines 15–19 and 22–23 to confirm defaults and checks.
+2. Open the updated README.md to confirm the documentation now matches the behavior.
+3. Run a small example calling `executeWithRetry` with the updated example values to confirm no thrown errors for valid inputs.
+
+---
+
+If you'd like, I can:
+- Run a quick unit snippet demonstrating valid vs invalid inputs (non-invasive, no source change), or
+- Add a short validation note to the README showing the exact error messages thrown for invalid input.
+
+Would you like me to add an example showing the thrown errors for invalid values?
+
+Made changes.
