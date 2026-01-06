@@ -1,0 +1,139 @@
+oswe-mini-m23a3s430  ：：
+
+User: Prompt —Documentation & Knowledge (Incorrect Docs)
+You are a senior software engineer and technical documentation auditor.
+Your task is to identify incorrect documentation, where documented parameters, value ranges, defaults, or usage rules do NOT match the actual implementation in code.
+--------------------------------------------------------------------------------
+Your Responsibilities:
+1.Identify Incorrect Documentation
+- Review all provided documentation files (e.g. README.md)
+- Review the corresponding source code files
+- Identify factual inconsistencies, including but not limited to:
+- Incorrect parameter description
+- Incorrect value range
+- Incorrect default value
+- Missing constraints that are enforced in code
+- Examples that appear valid but fail at runtime
+For each issue, you MUST list:
+- Documentation file name
+- Section or heading
+- Parameter name (if applicable)
+- What the documentation claims
+- What the code actually enforces
+--------------------------------------------------------------------------------
+2.Provide Mandatory Citation Evidence For EVERY issue, you MUST provide:
+- Documentation citation:
+- File name + section heading or quoted text
+- Code citation:
+- File name + exact line numbers
+- Explanation of enforcement logic
+--------------------------------------------------------------------------------
+3.Severity Classification Classify each issue as:
+- High: Leads to runtime errors or invalid usage
+- Medium: Misleading behavior but still works in some cases
+- Low: Minor but technically incorrect documentation
+--------------------------------------------------------------------------------
+4.Produce Corrected Documentation Generate:
+- README_backup.md → exact, unchanged copy of original documentation
+- README.md → corrected documentation that matches the code EXACTLY
+Rules:
+- ❌ Do NOT modify source code
+- ✅ Only documentation may be updated
+- ✅ All constraints, defaults, and ranges must be precise and explicit
+--------------------------------------------------------------------------------
+5.Generate Incorrect Documentation Report Generate report.json using the structure below: 
+{
+  "summary": {
+    "total_issues": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "details": [
+    {
+      "id": 1,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "maxRetries",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "",
+      "actual_value": "",
+      "citations": {
+        "doc": "",
+        "code": ""
+      },
+      "fix_summary": ""
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+6.Generate Citation Evidence File Produce citations.md containing:
+- Side-by-side comparison of:
+- Documentation statement
+- Code behavior
+- Explicit explanation of why the documentation is incorrect
+- Exact references used
+--------------------------------------------------------------------------------
+7.Generate Audit README Produce AUDIT_README.md explaining:
+- Scope of audit
+- Types of documentation errors found
+- How citations were derived
+- How reviewers can manually verify correctness
+--------------------------------------------------------------------------------
+📌 Strict Rules for the Model
+- MUST NOT hallucinate parameters not present in code
+- MUST NOT invent files that do not exist
+- MUST provide exact citations (file + line numbers or quoted text)
+- MUST NOT modify source code
+- MUST keep output structured, concise, and verifiable
+- MUST base all conclusions strictly on provided files
+
+GitHub Copilot: I'll read the source file and README to find mismatches.
+
+Read [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a3s430/input.ts)
+
+Read [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a3s430/README.md)
+
+Creating a backup README and generating the audit files, then I'll update README.md to match the code.
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a3s430/README_backup.md)
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a3s430/report.json)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a3s430/citations.md)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a3s430/AUDIT_README.md)
+
+✅ I found 3 documentation issues and fixed README to match the code.
+
+### Findings
+1. maxRetries — Configuration (High)
+   - Documented: Range 0–10, Default 1, "Number of retry attempts before failing." (README_backup.md lines 7–11)
+   - Code enforces: Default 3 and range 1–5; treated as maximum total attempts (includes initial). (input.ts lines 15, 18–19, 26, 31–35)
+
+2. backoffMs — Configuration (High)
+   - Documented: Default 100, no minimum. (README_backup.md lines 13–16)
+   - Code enforces: Default 1000 and minimum 500ms. (input.ts lines 16, 22–23)
+
+3. Example values — Example (High)
+   - Documented example: uses maxRetries: 0 and backoffMs: 100 (README_backup.md lines 20–24)
+   - Reality: both values violate runtime checks and will cause the function to throw. (input.ts lines 18–19, 22–23)
+
+### Actions performed
+- Saved original docs to README_backup.md
+- Updated README.md to match the implementation and added valid examples
+- Created: report.json, citations.md, and AUDIT_README.md
+
+Files updated/created in the workspace — review report.json and citations.md for exact quotes and line-numbered evidence.
+
+Made changes.

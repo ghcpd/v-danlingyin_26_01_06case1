@@ -1,0 +1,55 @@
+{
+  "summary": {
+    "total_issues": 3,
+    "high": 3,
+    "medium": 0,
+    "low": 0
+  },
+  "details": [
+    {
+      "id": 1,
+      "doc_file": "README.md",
+      "section": "Configuration / maxRetries",
+      "parameter": "maxRetries",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "Range: 0–10; Default: 1; Description: Number of retry attempts before failing.",
+      "actual_value": "Range enforced: 1–5; Default: 3; Behaviour: treated as maximum total attempts (includes initial attempt).",
+      "citations": {
+        "doc": "README_backup.md lines 7-11: '\n### maxRetries\n- Type: number\n- Range: 0–10\n- Default: 1\n- Description: Number of retry attempts before failing.'",
+        "code": "input.ts lines 15 and 18-19 and 26 and 31-35: 'const maxRetries = options?.maxRetries ?? 3;' (line 15); 'if (maxRetries < 1 || maxRetries > 5) { throw new Error("maxRetries must be between 1 and 5"); }' (lines 18-19); 'let attempts = 0;' (line 26); 'attempts++; if (attempts >= maxRetries) { throw err; }' (lines 31-35)."
+      },
+      "fix_summary": "Update README to state Range 1–5, Default 3, and clarify that maxRetries is the maximum total attempts (includes the initial attempt)."
+    },
+    {
+      "id": 2,
+      "doc_file": "README.md",
+      "section": "Configuration / backoffMs",
+      "parameter": "backoffMs",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "Default: 100; (no minimum specified)",
+      "actual_value": "Default: 1000; Minimum enforced: 500ms",
+      "citations": {
+        "doc": "README_backup.md lines 13-16: '\n### backoffMs\n- Type: number\n- Default: 100\n- Description: Delay between retries in milliseconds.'",
+        "code": "input.ts lines 16 and 22-23: 'const backoffMs = options?.backoffMs ?? 1000;' (line 16); 'if (backoffMs < 500) { throw new Error("backoffMs must be at least 500ms"); }' (lines 22-23)."
+      },
+      "fix_summary": "Update README to state Default 1000 and Minimum 500ms for backoffMs."
+    },
+    {
+      "id": 3,
+      "doc_file": "README.md",
+      "section": "Example",
+      "parameter": "example values",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "Example shows: maxRetries: 0, backoffMs: 100",
+      "actual_value": "Those values violate runtime checks and will cause the function to throw (maxRetries < 1 and backoffMs < 500).",
+      "citations": {
+        "doc": "README_backup.md lines 20-24: '\n```ts\nexecuteWithRetry(fetchData, {\n  maxRetries: 0,\n  backoffMs: 100\n});\n```'",
+        "code": "input.ts lines 18-19 and 22-23: 'if (maxRetries < 1 || maxRetries > 5) { throw new Error("maxRetries must be between 1 and 5"); }' (lines 18-19); 'if (backoffMs < 500) { throw new Error("backoffMs must be at least 500ms"); }' (lines 22-23)."
+      },
+      "fix_summary": "Replace the example with valid examples (e.g., omit options to use defaults or use maxRetries: 3 and backoffMs: 1000)."
+    }
+  ]
+}
