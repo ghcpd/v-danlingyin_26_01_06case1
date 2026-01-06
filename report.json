@@ -1,0 +1,55 @@
+{
+  "summary": {
+    "total_issues": 3,
+    "high": 3,
+    "medium": 0,
+    "low": 0
+  },
+  "details": [
+    {
+      "id": 1,
+      "doc_file": "README.md",
+      "section": "Configuration -> maxRetries",
+      "parameter": "maxRetries",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "Range: 0–10; Default: 1",
+      "actual_value": "Range enforced: 1–5; Default: 3",
+      "citations": {
+        "doc": "README.md lines 7-11:\n- Range: 0–10\n- Default: 1",
+        "code": "input.ts lines 15-19:\nconst maxRetries = options?.maxRetries ?? 3;\nif (maxRetries < 1 || maxRetries > 5) { throw new Error(\"maxRetries must be between 1 and 5\"); }"
+      },
+      "fix_summary": "Update range to 1–5 and default to 3; document that values outside [1,5] cause an Error."
+    },
+    {
+      "id": 2,
+      "doc_file": "README.md",
+      "section": "Configuration -> backoffMs",
+      "parameter": "backoffMs",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "Default: 100",
+      "actual_value": "Default: 1000; Minimum enforced: 500",
+      "citations": {
+        "doc": "README.md lines 13-16: Default: 100",
+        "code": "input.ts lines 16,22-23: const backoffMs = options?.backoffMs ?? 1000;\nif (backoffMs < 500) { throw new Error(\"backoffMs must be at least 500ms\"); }"
+      },
+      "fix_summary": "Update default to 1000 and document minimum of 500ms; example values below 500ms are invalid."
+    },
+    {
+      "id": 3,
+      "doc_file": "README.md",
+      "section": "Example",
+      "parameter": "example values",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "Example uses maxRetries: 0 and backoffMs: 100",
+      "actual_value": "Both values are invalid: maxRetries 0 violates min 1; backoffMs 100 < 500 violates minimum",
+      "citations": {
+        "doc": "README.md lines 21-24: executeWithRetry(fetchData, { maxRetries: 0, backoffMs: 100 });",
+        "code": "input.ts lines 18-19 and 22-23: if (maxRetries < 1 || maxRetries > 5) { throw new Error(...); } if (backoffMs < 500) { throw new Error(...); }"
+      },
+      "fix_summary": "Replace example with values that meet constraints, e.g., maxRetries: 3, backoffMs: 1000."
+    }
+  ]
+}
