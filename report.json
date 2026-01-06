@@ -1,0 +1,85 @@
+{
+  "summary": {
+    "total_issues": 5,
+    "high": 5,
+    "medium": 0,
+    "low": 0
+  },
+  "details": [
+    {
+      "id": 1,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "maxRetries",
+      "issue_type": "Incorrect Default Value",
+      "severity": "High",
+      "documented_value": "1",
+      "actual_value": "3",
+      "citations": {
+        "doc": "README.md, Configuration > maxRetries, line 12: 'Default: 1'",
+        "code": "input.ts, line 14: 'const maxRetries = options?.maxRetries ?? 3;'"
+      },
+      "fix_summary": "Changed default value from 1 to 3 to match actual code behavior"
+    },
+    {
+      "id": 2,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "maxRetries",
+      "issue_type": "Incorrect Value Range",
+      "severity": "High",
+      "documented_value": "0–10",
+      "actual_value": "1–5",
+      "citations": {
+        "doc": "README.md, Configuration > maxRetries, line 11: 'Range: 0–10'",
+        "code": "input.ts, lines 17-18: 'if (maxRetries < 1 || maxRetries > 5) { throw new Error(\"maxRetries must be between 1 and 5\"); }'"
+      },
+      "fix_summary": "Updated range from 0–10 to 1–5 to reflect actual validation constraints"
+    },
+    {
+      "id": 3,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "backoffMs",
+      "issue_type": "Incorrect Default Value",
+      "severity": "High",
+      "documented_value": "100",
+      "actual_value": "1000",
+      "citations": {
+        "doc": "README.md, Configuration > backoffMs, line 17: 'Default: 100'",
+        "code": "input.ts, line 15: 'const backoffMs = options?.backoffMs ?? 1000;'"
+      },
+      "fix_summary": "Changed default value from 100 to 1000 to match actual code behavior"
+    },
+    {
+      "id": 4,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "backoffMs",
+      "issue_type": "Missing Constraint Documentation",
+      "severity": "High",
+      "documented_value": "No minimum specified",
+      "actual_value": "Minimum: 500ms",
+      "citations": {
+        "doc": "README.md, Configuration > backoffMs, lines 15-18: No minimum constraint mentioned",
+        "code": "input.ts, lines 21-22: 'if (backoffMs < 500) { throw new Error(\"backoffMs must be at least 500ms\"); }'"
+      },
+      "fix_summary": "Added minimum constraint of 500ms to documentation"
+    },
+    {
+      "id": 5,
+      "doc_file": "README.md",
+      "section": "Example",
+      "parameter": "maxRetries",
+      "issue_type": "Invalid Example Usage",
+      "severity": "High",
+      "documented_value": "maxRetries: 0",
+      "actual_value": "Must be >= 1",
+      "citations": {
+        "doc": "README.md, Example, lines 22-25: 'maxRetries: 0' in example code",
+        "code": "input.ts, lines 17-18: 'if (maxRetries < 1 || maxRetries > 5) { throw new Error(\"maxRetries must be between 1 and 5\"); }'"
+      },
+      "fix_summary": "Updated example to use maxRetries: 3 instead of maxRetries: 0, which would fail at runtime"
+    }
+  ]
+}
