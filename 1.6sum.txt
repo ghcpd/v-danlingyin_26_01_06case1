@@ -1,0 +1,1053 @@
+Claude-haiku-4.5  ：：
+User: Prompt —Documentation & Knowledge (Incorrect Docs)
+You are a senior software engineer and technical documentation auditor.
+Your task is to identify incorrect documentation, where documented parameters, value ranges, defaults, or usage rules do NOT match the actual implementation in code.
+--------------------------------------------------------------------------------
+Your Responsibilities:
+1.Identify Incorrect Documentation
+- Review all provided documentation files (e.g. README.md)
+- Review the corresponding source code files
+- Identify factual inconsistencies, including but not limited to:
+- Incorrect parameter description
+- Incorrect value range
+- Incorrect default value
+- Missing constraints that are enforced in code
+- Examples that appear valid but fail at runtime
+For each issue, you MUST list:
+- Documentation file name
+- Section or heading
+- Parameter name (if applicable)
+- What the documentation claims
+- What the code actually enforces
+--------------------------------------------------------------------------------
+2.Provide Mandatory Citation Evidence For EVERY issue, you MUST provide:
+- Documentation citation:
+- File name + section heading or quoted text
+- Code citation:
+- File name + exact line numbers
+- Explanation of enforcement logic
+--------------------------------------------------------------------------------
+3.Severity Classification Classify each issue as:
+- High: Leads to runtime errors or invalid usage
+- Medium: Misleading behavior but still works in some cases
+- Low: Minor but technically incorrect documentation
+--------------------------------------------------------------------------------
+4.Produce Corrected Documentation Generate:
+- README_backup.md → exact, unchanged copy of original documentation
+- README.md → corrected documentation that matches the code EXACTLY
+Rules:
+- ❌ Do NOT modify source code
+- ✅ Only documentation may be updated
+- ✅ All constraints, defaults, and ranges must be precise and explicit
+--------------------------------------------------------------------------------
+5.Generate Incorrect Documentation Report Generate report.json using the structure below: 
+{
+  "summary": {
+    "total_issues": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "details": [
+    {
+      "id": 1,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "maxRetries",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "",
+      "actual_value": "",
+      "citations": {
+        "doc": "",
+        "code": ""
+      },
+      "fix_summary": ""
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+6.Generate Citation Evidence File Produce citations.md containing:
+- Side-by-side comparison of:
+- Documentation statement
+- Code behavior
+- Explicit explanation of why the documentation is incorrect
+- Exact references used
+--------------------------------------------------------------------------------
+7.Generate Audit README Produce AUDIT_README.md explaining:
+- Scope of audit
+- Types of documentation errors found
+- How citations were derived
+- How reviewers can manually verify correctness
+--------------------------------------------------------------------------------
+📌 Strict Rules for the Model
+- MUST NOT hallucinate parameters not present in code
+- MUST NOT invent files that do not exist
+- MUST provide exact citations (file + line numbers or quoted text)
+- MUST NOT modify source code
+- MUST keep output structured, concise, and verifiable
+- MUST base all conclusions strictly on provided files
+
+GitHub Copilot: I'll audit the documentation against the code and identify all discrepancies. Let me start by analyzing both files carefully. 
+
+Read [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/Claude-haiku-4.5/input.ts#1-1), lines 1 to 40
+
+Read [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/Claude-haiku-4.5/README.md)
+
+Now I've identified all the discrepancies. Let me create the corrected documentation and audit files: 
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/Claude-haiku-4.5/README_backup.md)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/Claude-haiku-4.5/README.md)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/Claude-haiku-4.5/report.json)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/Claude-haiku-4.5/citations.md)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/Claude-haiku-4.5/AUDIT_README.md)
+
+Now I need to replace the existing README.md with the corrected version: 
+
+Using "Replace String in File"
+
+
+```
+
+```
+## Audit Complete ✓
+
+I've identified and corrected **5 high-severity documentation errors**:
+
+### Issues Found
+
+| Issue | Parameter | Problem | Doc Claims | Code Enforces |
+|-------|-----------|---------|-----------|---------------|
+| 1 | maxRetries | Wrong default | Default: 1 | Default: 3 |
+| 2 | maxRetries | Wrong range | Range: 0–10 | Range: 1–5 |
+| 3 | backoffMs | Wrong default | Default: 100 | Default: 1000 |
+| 4 | backoffMs | Missing constraint | (not documented) | Minimum: 500ms |
+| 5 | Example | Invalid code | Uses `maxRetries: 0, backoffMs: 100` | Both violate constraints |
+
+### Generated Files
+
+1. **README_backup.md** - Original documentation preserved
+2. **README.md** - Corrected to match actual code behavior
+3. **report.json** - Structured audit report with all issues, citations, and severity classifications
+4. **citations.md** - Detailed side-by-side evidence comparing documentation vs. code behavior
+5. **AUDIT_README.md** - Comprehensive audit methodology and verification instructions
+
+All corrections ensure the documentation now accurately reflects the actual implementation in input.ts. No source code was modified.
+
+Made changes.
+
+grok-fast   ：：
+User: Prompt —Documentation & Knowledge (Incorrect Docs)
+You are a senior software engineer and technical documentation auditor.
+Your task is to identify incorrect documentation, where documented parameters, value ranges, defaults, or usage rules do NOT match the actual implementation in code.
+--------------------------------------------------------------------------------
+Your Responsibilities:
+1.Identify Incorrect Documentation
+- Review all provided documentation files (e.g. README.md)
+- Review the corresponding source code files
+- Identify factual inconsistencies, including but not limited to:
+- Incorrect parameter description
+- Incorrect value range
+- Incorrect default value
+- Missing constraints that are enforced in code
+- Examples that appear valid but fail at runtime
+For each issue, you MUST list:
+- Documentation file name
+- Section or heading
+- Parameter name (if applicable)
+- What the documentation claims
+- What the code actually enforces
+--------------------------------------------------------------------------------
+2.Provide Mandatory Citation Evidence For EVERY issue, you MUST provide:
+- Documentation citation:
+- File name + section heading or quoted text
+- Code citation:
+- File name + exact line numbers
+- Explanation of enforcement logic
+--------------------------------------------------------------------------------
+3.Severity Classification Classify each issue as:
+- High: Leads to runtime errors or invalid usage
+- Medium: Misleading behavior but still works in some cases
+- Low: Minor but technically incorrect documentation
+--------------------------------------------------------------------------------
+4.Produce Corrected Documentation Generate:
+- README_backup.md → exact, unchanged copy of original documentation
+- README.md → corrected documentation that matches the code EXACTLY
+Rules:
+- ❌ Do NOT modify source code
+- ✅ Only documentation may be updated
+- ✅ All constraints, defaults, and ranges must be precise and explicit
+--------------------------------------------------------------------------------
+5.Generate Incorrect Documentation Report Generate report.json using the structure below: 
+{
+  "summary": {
+    "total_issues": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "details": [
+    {
+      "id": 1,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "maxRetries",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "",
+      "actual_value": "",
+      "citations": {
+        "doc": "",
+        "code": ""
+      },
+      "fix_summary": ""
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+6.Generate Citation Evidence File Produce citations.md containing:
+- Side-by-side comparison of:
+- Documentation statement
+- Code behavior
+- Explicit explanation of why the documentation is incorrect
+- Exact references used
+--------------------------------------------------------------------------------
+7.Generate Audit README Produce AUDIT_README.md explaining:
+- Scope of audit
+- Types of documentation errors found
+- How citations were derived
+- How reviewers can manually verify correctness
+--------------------------------------------------------------------------------
+📌 Strict Rules for the Model
+- MUST NOT hallucinate parameters not present in code
+- MUST NOT invent files that do not exist
+- MUST provide exact citations (file + line numbers or quoted text)
+- MUST NOT modify source code
+- MUST keep output structured, concise, and verifiable
+- MUST base all conclusions strictly on provided files
+
+GitHub Copilot: Optimizing tool selection...
+
+Read [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/grok-fast/README.md)
+
+Read [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/grok-fast/input.ts)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/grok-fast/README_backup.md)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/grok-fast/README.md)
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/grok-fast/report.json)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/grok-fast/citations.md)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/grok-fast/AUDIT_README.md)
+
+I have completed the documentation audit as requested. Here's a summary of the findings and actions taken:
+
+## Identified Issues
+1. **maxRetries Default**: Documentation claims 1, code enforces 3 (Medium severity)
+2. **maxRetries Range**: Documentation claims 0-10, code enforces 1-5 (High severity - leads to runtime errors)
+3. **backoffMs Default**: Documentation claims 100ms, code enforces 1000ms (Medium severity)
+4. **backoffMs Minimum**: Documentation omits minimum 500ms constraint enforced in code (High severity - leads to runtime errors)
+
+## Generated Files
+- README_backup.md: Exact copy of original documentation
+- README.md: Corrected documentation matching code implementation exactly
+- report.json: Structured report with 4 total issues (2 High, 2 Medium)
+- citations.md: Detailed side-by-side comparisons with exact file references
+- AUDIT_README.md: Complete audit explanation and verification guidance
+
+All conclusions are based strictly on the provided README.md and input.ts files, with no modifications to source code. The corrected documentation now accurately reflects the actual implementation constraints, defaults, and valid usage patterns.
+
+Made changes.
+
+oswe-mini-m23a1s255-new    ：：
+User: Prompt —Documentation & Knowledge (Incorrect Docs)
+You are a senior software engineer and technical documentation auditor.
+Your task is to identify incorrect documentation, where documented parameters, value ranges, defaults, or usage rules do NOT match the actual implementation in code.
+--------------------------------------------------------------------------------
+Your Responsibilities:
+1.Identify Incorrect Documentation
+- Review all provided documentation files (e.g. README.md)
+- Review the corresponding source code files
+- Identify factual inconsistencies, including but not limited to:
+- Incorrect parameter description
+- Incorrect value range
+- Incorrect default value
+- Missing constraints that are enforced in code
+- Examples that appear valid but fail at runtime
+For each issue, you MUST list:
+- Documentation file name
+- Section or heading
+- Parameter name (if applicable)
+- What the documentation claims
+- What the code actually enforces
+--------------------------------------------------------------------------------
+2.Provide Mandatory Citation Evidence For EVERY issue, you MUST provide:
+- Documentation citation:
+- File name + section heading or quoted text
+- Code citation:
+- File name + exact line numbers
+- Explanation of enforcement logic
+--------------------------------------------------------------------------------
+3.Severity Classification Classify each issue as:
+- High: Leads to runtime errors or invalid usage
+- Medium: Misleading behavior but still works in some cases
+- Low: Minor but technically incorrect documentation
+--------------------------------------------------------------------------------
+4.Produce Corrected Documentation Generate:
+- README_backup.md → exact, unchanged copy of original documentation
+- README.md → corrected documentation that matches the code EXACTLY
+Rules:
+- ❌ Do NOT modify source code
+- ✅ Only documentation may be updated
+- ✅ All constraints, defaults, and ranges must be precise and explicit
+--------------------------------------------------------------------------------
+5.Generate Incorrect Documentation Report Generate report.json using the structure below: 
+{
+  "summary": {
+    "total_issues": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "details": [
+    {
+      "id": 1,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "maxRetries",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "",
+      "actual_value": "",
+      "citations": {
+        "doc": "",
+        "code": ""
+      },
+      "fix_summary": ""
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+6.Generate Citation Evidence File Produce citations.md containing:
+- Side-by-side comparison of:
+- Documentation statement
+- Code behavior
+- Explicit explanation of why the documentation is incorrect
+- Exact references used
+--------------------------------------------------------------------------------
+7.Generate Audit README Produce AUDIT_README.md explaining:
+- Scope of audit
+- Types of documentation errors found
+- How citations were derived
+- How reviewers can manually verify correctness
+--------------------------------------------------------------------------------
+📌 Strict Rules for the Model
+- MUST NOT hallucinate parameters not present in code
+- MUST NOT invent files that do not exist
+- MUST provide exact citations (file + line numbers or quoted text)
+- MUST NOT modify source code
+- MUST keep output structured, concise, and verifiable
+- MUST base all conclusions strictly on provided files
+
+GitHub Copilot: Finding: I found multiple factual mismatches between README.md and input.ts (defaults, value ranges, and an invalid example). I'll read both files to extract exact lines and produce a backup, corrected README, and the full audit artifacts.
+
+Read [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a1s255-new/README.md)
+
+Read [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a1s255-new/input.ts)
+
+Preparing changes now: I'll add `README_backup.md` (exact original), write the corrected README.md, and add `report.json`, `citations.md`, and `AUDIT_README.md` with precise citations and fixes.
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a1s255-new/README_backup.md)
+
+Applying edits: I'll replace the existing README.md with a corrected, code-accurate version and add the audit artifacts (`report.json`, `citations.md`, `AUDIT_README.md`).
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a1s255-new/report.json)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a1s255-new/citations.md)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a1s255-new/AUDIT_README.md)
+
+Finding — ✅ 6 actionable documentation defects found (defaults, ranges, semantics, and an invalid example). I created an exact backup of the original docs and produced a code-accurate README plus a full audit (see files added to the repo).  
+
+## Summary (quick)
+- Total issues: **6** — High: **3**, Medium: **3**, Low: **0** ✅  
+- Files added/updated:
+  - Backup: README_backup.md (original, unchanged)  
+  - Fixed docs: README.md (updated to match code)  
+  - Audit artifacts: report.json, citations.md, AUDIT_README.md  
+
+---
+
+## Detailed issues (each includes doc claim, code behavior, exact citations)
+1. **maxRetries — documented range is wrong** ⚠️ (High)  
+   - Doc: README.md → Configuration / `maxRetries` — **Range: 0–10**  
+     - Citation: README.md lines **7–9** ("Range: 0–10")  
+   - Code: input.ts enforces **1–5** (and defaults to 3)  
+     - Citation: input.ts **lines 15, 18–20** (`const maxRetries = ... ?? 3;` and `if (maxRetries < 1 || maxRetries > 5) ...`)  
+   - Impact: runtime error for documented-but-out-of-range values.  
+
+2. **maxRetries — documented default is wrong** ⚠️ (Medium)  
+   - Doc: README.md — **Default: 1** (README.md line **10**)  
+   - Code: default is **3** (input.ts line **15**)  
+   - Impact: behavioral mismatch (different retry behavior than documented).
+
+3. **maxRetries — semantics (attempts vs retries) is incorrect/ambiguous** ⚠️ (Medium)  
+   - Doc: described as "Number of retry attempts before failing." (README.md line **11**)  
+   - Code: **`maxRetries` = maximum total attempts** (initial attempt + retries). Retries performed = `maxRetries - 1`. See `attempts` logic.  
+     - Citation: input.ts **lines 26, 32–35** (`let attempts = 0; attempts++; if (attempts >= maxRetries) { throw err; }`)  
+   - Impact: users will set `maxRetries` incorrectly (e.g., `maxRetries:1` means 0 retries).
+
+4. **backoffMs — documented default is wrong** ⚠️ (Medium)  
+   - Doc: README.md — **Default: 100** (README.md line **15**)  
+   - Code: default is **1000** (input.ts line **16**)  
+   - Impact: unexpected delay between retries if user relies on docs.
+
+5. **backoffMs — missing minimum constraint in docs** ⚠️ (High)  
+   - Doc: README.md does **not** list a minimum (README.md lines **13–16**)  
+   - Code: enforces **backoffMs >= 500** and will throw otherwise  
+     - Citation: input.ts **lines 16, 22–24** (`const backoffMs = ... ?? 1000;` and `if (backoffMs < 500) { throw new Error("backoffMs must be at least 500ms"); }`)  
+   - Impact: documented examples or user-provided values below 500ms will fail at runtime.
+
+6. **Example in README is invalid** 🔥 (High)  
+   - Doc example: uses `maxRetries: 0` and `backoffMs: 100` (README.md lines **20–24**)  
+   - Code: **both** values are rejected (see checks above) — the example will throw at runtime  
+     - Citation: input.ts **lines 18–20** and **22–24**  
+   - Impact: misleading and causes runtime failures for users trying the example.
+
+---
+
+## What I changed (concrete)
+- Created README_backup.md — exact original copy. ✅  
+- Rewrote README.md to match implementation exactly:
+  - `maxRetries`: **allowed 1–5**, **default 3**, clarified that it is *total attempts* (retries = `maxRetries - 1`).  
+  - `backoffMs`: **minimum 500ms**, **default 1000ms**.  
+  - Replaced the invalid example with valid examples (including `maxRetries:1` to show “no retries”).  
+- Added audit outputs: report.json, citations.md, AUDIT_README.md (full evidence + verification steps).
+
+Files updated/created (workspace):
+- README.md (updated)
+- README_backup.md (original)
+- report.json (structured issues + fixes)
+- citations.md (side-by-side evidence with exact lines)
+- AUDIT_README.md (scope, verification, next steps)
+
+---
+
+## How you can verify (quick)
+- Inspect the enforcement in input.ts:
+  - Defaults: lines **15–16**  
+  - maxRetries check: lines **18–20**  
+  - backoffMs check: lines **22–24**  
+  - Retry logic (semantics): lines **26, 32–35**
+- Try these (they should throw):  
+  - `executeWithRetry(async () => {}, { maxRetries: 0 })`  
+  - `executeWithRetry(async () => {}, { backoffMs: 100 })`
+- Valid examples (from corrected README):  
+  - `executeWithRetry(fetchData)` (uses defaults: maxRetries=3, backoffMs=1000)  
+  - `executeWithRetry(fetchData, { maxRetries: 1 })` (no retries)
+
+---
+
+## Recommended next steps (prioritized) 🔧
+1. Keep the corrected README.md and merge the audit artifacts. ✅  
+2. Add unit tests covering: defaults, invalid `maxRetries`, invalid `backoffMs`, and `maxRetries:1` behavior. ✅  
+3. (Optional) Consider renaming `maxRetries` → `maxAttempts` or document the mapping prominently to avoid future confusion. 💡
+
+---
+
+Important files to review now:
+- README.md (updated, primary fix)  
+- README_backup.md (original copy)  
+- report.json, citations.md, AUDIT_README.md (evidence + verification)
+
+If you want, I can:
+- Open a PR draft with these documentation changes and suggested unit tests, or
+- Create unit tests that assert the documented constraints and behaviors.
+
+Would you like a PR and unit-test patch next?
+
+Made changes.
+
+oswe-mini-m23a3s430  ：：
+
+User: Prompt —Documentation & Knowledge (Incorrect Docs)
+You are a senior software engineer and technical documentation auditor.
+Your task is to identify incorrect documentation, where documented parameters, value ranges, defaults, or usage rules do NOT match the actual implementation in code.
+--------------------------------------------------------------------------------
+Your Responsibilities:
+1.Identify Incorrect Documentation
+- Review all provided documentation files (e.g. README.md)
+- Review the corresponding source code files
+- Identify factual inconsistencies, including but not limited to:
+- Incorrect parameter description
+- Incorrect value range
+- Incorrect default value
+- Missing constraints that are enforced in code
+- Examples that appear valid but fail at runtime
+For each issue, you MUST list:
+- Documentation file name
+- Section or heading
+- Parameter name (if applicable)
+- What the documentation claims
+- What the code actually enforces
+--------------------------------------------------------------------------------
+2.Provide Mandatory Citation Evidence For EVERY issue, you MUST provide:
+- Documentation citation:
+- File name + section heading or quoted text
+- Code citation:
+- File name + exact line numbers
+- Explanation of enforcement logic
+--------------------------------------------------------------------------------
+3.Severity Classification Classify each issue as:
+- High: Leads to runtime errors or invalid usage
+- Medium: Misleading behavior but still works in some cases
+- Low: Minor but technically incorrect documentation
+--------------------------------------------------------------------------------
+4.Produce Corrected Documentation Generate:
+- README_backup.md → exact, unchanged copy of original documentation
+- README.md → corrected documentation that matches the code EXACTLY
+Rules:
+- ❌ Do NOT modify source code
+- ✅ Only documentation may be updated
+- ✅ All constraints, defaults, and ranges must be precise and explicit
+--------------------------------------------------------------------------------
+5.Generate Incorrect Documentation Report Generate report.json using the structure below: 
+{
+  "summary": {
+    "total_issues": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "details": [
+    {
+      "id": 1,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "maxRetries",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "",
+      "actual_value": "",
+      "citations": {
+        "doc": "",
+        "code": ""
+      },
+      "fix_summary": ""
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+6.Generate Citation Evidence File Produce citations.md containing:
+- Side-by-side comparison of:
+- Documentation statement
+- Code behavior
+- Explicit explanation of why the documentation is incorrect
+- Exact references used
+--------------------------------------------------------------------------------
+7.Generate Audit README Produce AUDIT_README.md explaining:
+- Scope of audit
+- Types of documentation errors found
+- How citations were derived
+- How reviewers can manually verify correctness
+--------------------------------------------------------------------------------
+📌 Strict Rules for the Model
+- MUST NOT hallucinate parameters not present in code
+- MUST NOT invent files that do not exist
+- MUST provide exact citations (file + line numbers or quoted text)
+- MUST NOT modify source code
+- MUST keep output structured, concise, and verifiable
+- MUST base all conclusions strictly on provided files
+
+GitHub Copilot: I'll read the source file and README to find mismatches.
+
+Read [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a3s430/input.ts)
+
+Read [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a3s430/README.md)
+
+Creating a backup README and generating the audit files, then I'll update README.md to match the code.
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a3s430/README_backup.md)
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a3s430/report.json)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a3s430/citations.md)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-m23a3s430/AUDIT_README.md)
+
+✅ I found 3 documentation issues and fixed README to match the code.
+
+### Findings
+1. maxRetries — Configuration (High)
+   - Documented: Range 0–10, Default 1, "Number of retry attempts before failing." (README_backup.md lines 7–11)
+   - Code enforces: Default 3 and range 1–5; treated as maximum total attempts (includes initial). (input.ts lines 15, 18–19, 26, 31–35)
+
+2. backoffMs — Configuration (High)
+   - Documented: Default 100, no minimum. (README_backup.md lines 13–16)
+   - Code enforces: Default 1000 and minimum 500ms. (input.ts lines 16, 22–23)
+
+3. Example values — Example (High)
+   - Documented example: uses maxRetries: 0 and backoffMs: 100 (README_backup.md lines 20–24)
+   - Reality: both values violate runtime checks and will cause the function to throw. (input.ts lines 18–19, 22–23)
+
+### Actions performed
+- Saved original docs to README_backup.md
+- Updated README.md to match the implementation and added valid examples
+- Created: report.json, citations.md, and AUDIT_README.md
+
+Files updated/created in the workspace — review report.json and citations.md for exact quotes and line-numbered evidence.
+
+Made changes.
+
+oswe-mini-prime-new     ：：
+
+User: Prompt —Documentation & Knowledge (Incorrect Docs)
+You are a senior software engineer and technical documentation auditor.
+Your task is to identify incorrect documentation, where documented parameters, value ranges, defaults, or usage rules do NOT match the actual implementation in code.
+--------------------------------------------------------------------------------
+Your Responsibilities:
+1.Identify Incorrect Documentation
+- Review all provided documentation files (e.g. README.md)
+- Review the corresponding source code files
+- Identify factual inconsistencies, including but not limited to:
+- Incorrect parameter description
+- Incorrect value range
+- Incorrect default value
+- Missing constraints that are enforced in code
+- Examples that appear valid but fail at runtime
+For each issue, you MUST list:
+- Documentation file name
+- Section or heading
+- Parameter name (if applicable)
+- What the documentation claims
+- What the code actually enforces
+--------------------------------------------------------------------------------
+2.Provide Mandatory Citation Evidence For EVERY issue, you MUST provide:
+- Documentation citation:
+- File name + section heading or quoted text
+- Code citation:
+- File name + exact line numbers
+- Explanation of enforcement logic
+--------------------------------------------------------------------------------
+3.Severity Classification Classify each issue as:
+- High: Leads to runtime errors or invalid usage
+- Medium: Misleading behavior but still works in some cases
+- Low: Minor but technically incorrect documentation
+--------------------------------------------------------------------------------
+4.Produce Corrected Documentation Generate:
+- README_backup.md → exact, unchanged copy of original documentation
+- README.md → corrected documentation that matches the code EXACTLY
+Rules:
+- ❌ Do NOT modify source code
+- ✅ Only documentation may be updated
+- ✅ All constraints, defaults, and ranges must be precise and explicit
+--------------------------------------------------------------------------------
+5.Generate Incorrect Documentation Report Generate report.json using the structure below: 
+{
+  "summary": {
+    "total_issues": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "details": [
+    {
+      "id": 1,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "maxRetries",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "",
+      "actual_value": "",
+      "citations": {
+        "doc": "",
+        "code": ""
+      },
+      "fix_summary": ""
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+6.Generate Citation Evidence File Produce citations.md containing:
+- Side-by-side comparison of:
+- Documentation statement
+- Code behavior
+- Explicit explanation of why the documentation is incorrect
+- Exact references used
+--------------------------------------------------------------------------------
+7.Generate Audit README Produce AUDIT_README.md explaining:
+- Scope of audit
+- Types of documentation errors found
+- How citations were derived
+- How reviewers can manually verify correctness
+--------------------------------------------------------------------------------
+📌 Strict Rules for the Model
+- MUST NOT hallucinate parameters not present in code
+- MUST NOT invent files that do not exist
+- MUST provide exact citations (file + line numbers or quoted text)
+- MUST NOT modify source code
+- MUST keep output structured, concise, and verifiable
+- MUST base all conclusions strictly on provided files
+
+GitHub Copilot: Let me fetch the source and README files to extract exact line-numbered citations and verify constraints.
+
+Read [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-prime-new/input.ts)
+
+Read [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-prime-new/README.md)
+
+Proceeding to create the README backup and audit artifacts; I'll mark the backup task in-progress.
+
+Created 7 todos
+
+Perfect! I found that the README's `maxRetries` and `backoffMs` defaults and ranges conflict with the implementation, and the example uses invalid values that would throw at runtime. My next step is to back up the original README, update README.md to reflect the code, and add the audit artifacts (`report.json`, `citations.md`, `AUDIT_README.md`).
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-prime-new/README_backup.md)
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-prime-new/report.json)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-prime-new/citations.md)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-prime-new/AUDIT_README.md)
+
+Nice! The README has been backed up and updated, and audit artifacts were created; I'll mark the backup/update tasks completed and set wrap-up as in-progress.
+
+Starting: *Wrap up and deliver summary* (7/7)
+
+I'm going to finalize the todo list and mark everything completed.
+
+Completed: *Wrap up and deliver summary* (7/7)
+
+## ✅ Wrap-up — Audit complete
+
+Perfect! The audit is complete: I backed up the original README.md, updated README.md to match the implementation in input.ts, and created the requested audit artifacts (report.json, citations.md, AUDIT_README.md). Next step: please review the files and tell me if you want any wording changes or extra checks. 🔧
+
+---
+
+## 🔎 Summary of Identified Issues
+
+1) Issue ID: 1  
+- **Doc file:** README.md  
+- **Section:** Configuration → `maxRetries`  
+- **Documentation claims:**  
+  - Range: 0–10  
+  - Default: 1  
+  - Description: Number of retry attempts before failing.  
+- **Code actually enforces:**  
+  - Default assigned: `const maxRetries = options?.maxRetries ?? 3;` (default = 3) — input.ts line 15  
+  - Range enforced: throws if `maxRetries < 1 || maxRetries > 5` — input.ts lines 18–20 (allowed range is 1–5)  
+- **Severity:** High (documented value like `maxRetries: 0` will throw at runtime)  
+- **Citations:**  
+  - Documentation citation: README.md (lines 7–11, original backup at README_backup.md contains exact original text)  
+  - Code citation: input.ts lines **15**, **18–20** (exact lines referenced)  
+- **Fix summary:** README updated to state **Range 1–5** and **Default 3**; example updated to valid values.
+
+---
+
+2) Issue ID: 2  
+- **Doc file:** README.md  
+- **Section:** Configuration → `backoffMs`  
+- **Documentation claims:**  
+  - Default: 100  
+  - No minimum documented  
+- **Code actually enforces:**  
+  - Default assigned: `const backoffMs = options?.backoffMs ?? 1000;` (default = 1000) — input.ts line 16  
+  - Minimum enforced: throws if `backoffMs < 500` — input.ts lines 22–24 (minimum allowed = 500)  
+- **Severity:** High (documented example `backoffMs: 100` will throw at runtime)  
+- **Citations:**  
+  - Documentation citation: README.md (lines 13–16 and example lines 21–24; original preserved in README_backup.md)  
+  - Code citation: input.ts lines **16**, **22–24**  
+- **Fix summary:** README updated to state **Default 1000** and **Minimum 500**; example updated to valid values.
+
+---
+
+## 🔧 Files changed / created
+- README_backup.md — exact original copy of the README (unchanged). ✅  
+- README.md — updated to match the implementation (defaults, ranges, and example corrected). ✅  
+- report.json — structured issues report (2 issues; both High). ✅  
+- citations.md — side-by-side doc vs code evidence with line references and explanations. ✅  
+- AUDIT_README.md — audit scope, how citations were derived, and verification steps. ✅
+
+All changes are documentation-only; source code (input.ts) was not modified.
+
+---
+
+## 📋 How to verify quickly
+- Inspect input.ts:
+  - Default and constraint for `maxRetries`: line **15** and lines **18–20**.
+  - Default and constraint for `backoffMs`: line **16** and lines **22–24**.
+- Run a quick local check (example that would throw based on original doc):
+  - Calling `executeWithRetry(..., { maxRetries: 0, backoffMs: 100 })` will throw because both values are outside code-enforced constraints. (See AUDIT_README.md for reproduction steps.)
+
+---
+
+If you want, I can:
+- Add unit tests that assert the documented contract (recommended), or
+- Reword the documentation (tone/clarity) while keeping it factual.
+
+Would you like me to add tests or adjust any of the wording?
+
+Made changes.
+oswe-mini-secondary    ：：
+User: Prompt —Documentation & Knowledge (Incorrect Docs)
+You are a senior software engineer and technical documentation auditor.
+Your task is to identify incorrect documentation, where documented parameters, value ranges, defaults, or usage rules do NOT match the actual implementation in code.
+--------------------------------------------------------------------------------
+Your Responsibilities:
+1.Identify Incorrect Documentation
+- Review all provided documentation files (e.g. README.md)
+- Review the corresponding source code files
+- Identify factual inconsistencies, including but not limited to:
+- Incorrect parameter description
+- Incorrect value range
+- Incorrect default value
+- Missing constraints that are enforced in code
+- Examples that appear valid but fail at runtime
+For each issue, you MUST list:
+- Documentation file name
+- Section or heading
+- Parameter name (if applicable)
+- What the documentation claims
+- What the code actually enforces
+--------------------------------------------------------------------------------
+2.Provide Mandatory Citation Evidence For EVERY issue, you MUST provide:
+- Documentation citation:
+- File name + section heading or quoted text
+- Code citation:
+- File name + exact line numbers
+- Explanation of enforcement logic
+--------------------------------------------------------------------------------
+3.Severity Classification Classify each issue as:
+- High: Leads to runtime errors or invalid usage
+- Medium: Misleading behavior but still works in some cases
+- Low: Minor but technically incorrect documentation
+--------------------------------------------------------------------------------
+4.Produce Corrected Documentation Generate:
+- README_backup.md → exact, unchanged copy of original documentation
+- README.md → corrected documentation that matches the code EXACTLY
+Rules:
+- ❌ Do NOT modify source code
+- ✅ Only documentation may be updated
+- ✅ All constraints, defaults, and ranges must be precise and explicit
+--------------------------------------------------------------------------------
+5.Generate Incorrect Documentation Report Generate report.json using the structure below: 
+{
+  "summary": {
+    "total_issues": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "details": [
+    {
+      "id": 1,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "maxRetries",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "",
+      "actual_value": "",
+      "citations": {
+        "doc": "",
+        "code": ""
+      },
+      "fix_summary": ""
+    }
+  ]
+}
+
+--------------------------------------------------------------------------------
+6.Generate Citation Evidence File Produce citations.md containing:
+- Side-by-side comparison of:
+- Documentation statement
+- Code behavior
+- Explicit explanation of why the documentation is incorrect
+- Exact references used
+--------------------------------------------------------------------------------
+7.Generate Audit README Produce AUDIT_README.md explaining:
+- Scope of audit
+- Types of documentation errors found
+- How citations were derived
+- How reviewers can manually verify correctness
+--------------------------------------------------------------------------------
+📌 Strict Rules for the Model
+- MUST NOT hallucinate parameters not present in code
+- MUST NOT invent files that do not exist
+- MUST provide exact citations (file + line numbers or quoted text)
+- MUST NOT modify source code
+- MUST keep output structured, concise, and verifiable
+- MUST base all conclusions strictly on provided files
+
+GitHub Copilot: Proceeding to start the audit: I'll create a short plan and then review README.md and input.ts for mismatches.
+
+Created 8 todos
+
+Read [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-secondary/README.md)
+
+Read [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-secondary/input.ts)
+
+Great! I found mismatches in defaults and allowed ranges for `maxRetries` and `backoffMs` in the README vs input.ts. My next step is to compile exact citations and list each issue with severity.
+
+Starting: *Compile issues and gather citations* (2/8)
+
+Proceeding to mark the review step done and start creating documentation files (backup + corrected files).
+
+Starting: *Create `README_backup.md`* (3/8)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-secondary/README_backup.md)
+
+Starting: *Update `README.md` to match code* (4/8)
+
+Using "Apply Patch"
+
+
+```
+
+```
+
+
+Starting: *Create `report.json`* (5/8)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-secondary/report.json)
+
+Starting: *Create `citations.md`* (6/8)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-secondary/citations.md)
+
+Starting: *Create `AUDIT_README.md`* (7/8)
+
+Created [](file:///c%3A/Users/v-danlingyin/Documents/microsoft_projects_files/bugBash/26.1/1.6/case1/oswe-mini-secondary/AUDIT_README.md)
+
+Starting: *Final wrap-up and deliverables* (8/8)
+
+Completed: *Final wrap-up and deliverables* (8/8)
+
+Perfect! The documentation inconsistencies are fixed and all deliverables are produced (backup, corrected README, report, citations, and audit README). Next step: you can review the files below — I list the issues, exact citations, and where to find each generated file.
+
+## Summary of Findings ✅
+
+- Total issues found: **3** (all **High** severity)
+  1. `maxRetries` documented range and default are incorrect.
+  2. `backoffMs` documented default (and missing minimum) is incorrect.
+  3. README example uses values that will throw at runtime.
+
+---
+
+## Detailed Issues (concise) 🔍
+
+1) Issue: maxRetries — Incorrect range & default (High)
+- Documentation: README.md (Configuration -> `maxRetries`)
+  - Documented: "Range: 0–10" and "Default: 1"
+  - Location: README.md lines 7–11
+- Code: input.ts
+  - Actual default: `const maxRetries = options?.maxRetries ?? 3;` (line 15)
+  - Enforcement: `if (maxRetries < 1 || maxRetries > 5) { throw new Error("maxRetries must be between 1 and 5"); }` (lines 18–19)
+- Explanation: Default is 3; allowed range is 1–5. A documented `maxRetries: 0` will throw at runtime.
+- Severity: High
+
+2) Issue: backoffMs — Incorrect default and missing minimum (High)
+- Documentation: README.md (Configuration -> `backoffMs`)
+  - Documented: "Default: 100" (lines 13–16)
+- Code: input.ts
+  - Actual default: `const backoffMs = options?.backoffMs ?? 1000;` (line 16)
+  - Enforcement: `if (backoffMs < 500) { throw new Error("backoffMs must be at least 500ms"); }` (lines 22–23)
+- Explanation: Default is 1000ms and minimum allowed is 500ms. Documented `backoffMs: 100` will throw.
+- Severity: High
+
+3) Issue: Example uses invalid values (High)
+- Documentation: README.md Example (lines 21–24): `maxRetries: 0, backoffMs: 100`
+- Code: input.ts enforces the constraints noted above (lines 18–19 and 22–23).
+- Explanation: Both values in the example violate runtime checks and will cause the function to throw.
+- Severity: High
+
+---
+
+## Deliverables created (files added/updated) 🔧
+
+- README_backup.md — Exact untouched copy of original README.md.
+- README.md — Updated to match code **exactly**:
+  - `maxRetries`: Range **1–5**, Default **3**, clarified behavior (1 = no retries).
+  - `backoffMs`: Default **1000**, Minimum **500** ms.
+  - Example replaced with valid values.
+- report.json — Structured report listing all issues, severities, citations, and fixes.
+- citations.md — Side-by-side evidence for each issue (documentation vs code) with quoted lines and explanations.
+- AUDIT_README.md — Short guide describing scope, types of errors found, how citations were derived, and verification steps.
+
+Files were created/updated in:
+- oswe-mini-secondary
+
+---
+
+## Exact Code Citations (quick reference) 📚
+
+- Default and checks:
+  - input.ts line 15: const maxRetries = options?.maxRetries ?? 3;
+  - input.ts lines 18–19: if (maxRetries < 1 || maxRetries > 5) { throw new Error("maxRetries must be between 1 and 5"); }
+  - input.ts line 16: const backoffMs = options?.backoffMs ?? 1000;
+  - input.ts lines 22–23: if (backoffMs < 500) { throw new Error("backoffMs must be at least 500ms"); }
+
+- README original problematic lines (now in README_backup.md):
+  - `maxRetries` block: lines 7–11 (Range: 0–10, Default: 1)
+  - `backoffMs` block: lines 13–16 (Default: 100)
+  - Example: lines 21–24 (maxRetries: 0, backoffMs: 100)
+
+---
+
+## How you can verify (quick steps) ✔️
+1. Inspect input.ts lines 15–19 and 22–23 to confirm defaults and checks.
+2. Open the updated README.md to confirm the documentation now matches the behavior.
+3. Run a small example calling `executeWithRetry` with the updated example values to confirm no thrown errors for valid inputs.
+
+---
+
+If you'd like, I can:
+- Run a quick unit snippet demonstrating valid vs invalid inputs (non-invasive, no source change), or
+- Add a short validation note to the README showing the exact error messages thrown for invalid input.
+
+Would you like me to add an example showing the thrown errors for invalid values?
+
+Made changes.
