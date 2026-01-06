@@ -1,0 +1,100 @@
+{
+  "summary": {
+    "total_issues": 6,
+    "high": 3,
+    "medium": 3,
+    "low": 0
+  },
+  "details": [
+    {
+      "id": 1,
+      "doc_file": "README.md",
+      "section": "Configuration / maxRetries",
+      "parameter": "maxRetries",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "Range: 0–10",
+      "actual_value": "Range: 1–5 (enforced)",
+      "citations": {
+        "doc": "README.md lines 7-11: '- Range: 0–10'",
+        "code": "input.ts lines 15 and 18-20: 'const maxRetries = options?.maxRetries ?? 3;' and 'if (maxRetries < 1 || maxRetries > 5) { throw new Error("maxRetries must be between 1 and 5"); }'"
+      },
+      "fix_summary": "Update documented range to 1–5 and reference runtime enforcement."
+    },
+    {
+      "id": 2,
+      "doc_file": "README.md",
+      "section": "Configuration / maxRetries",
+      "parameter": "maxRetries (default)",
+      "issue_type": "Incorrect Documentation",
+      "severity": "Medium",
+      "documented_value": "Default: 1",
+      "actual_value": "Default: 3 (code uses nullish coalescing to 3)",
+      "citations": {
+        "doc": "README.md line 10: '- Default: 1'",
+        "code": "input.ts line 15: 'const maxRetries = options?.maxRetries ?? 3;'"
+      },
+      "fix_summary": "Set README default to 3 (matches code)."
+    },
+    {
+      "id": 3,
+      "doc_file": "README.md",
+      "section": "Configuration / maxRetries (description)",
+      "parameter": "maxRetries (semantics)",
+      "issue_type": "Incorrect Documentation",
+      "severity": "Medium",
+      "documented_value": "Description: Number of retry attempts before failing.",
+      "actual_value": "Code treats `maxRetries` as the maximum total attempts (initial attempt + retries); retries performed = maxRetries - 1.",
+      "citations": {
+        "doc": "README.md line 11: '- Description: Number of retry attempts before failing.'",
+        "code": "input.ts lines 26 and 32-35: 'let attempts = 0;' and 'attempts++; if (attempts >= maxRetries) { throw err; }'"
+      },
+      "fix_summary": "Clarify that `maxRetries` is the maximum total attempts and show how to express 'no retries'."
+    },
+    {
+      "id": 4,
+      "doc_file": "README.md",
+      "section": "Configuration / backoffMs (default)",
+      "parameter": "backoffMs (default)",
+      "issue_type": "Incorrect Documentation",
+      "severity": "Medium",
+      "documented_value": "Default: 100",
+      "actual_value": "Default: 1000 (code uses nullish coalescing to 1000)",
+      "citations": {
+        "doc": "README.md line 15: '- Default: 100'",
+        "code": "input.ts line 16: 'const backoffMs = options?.backoffMs ?? 1000;'"
+      },
+      "fix_summary": "Update README default for `backoffMs` to 1000ms."
+    },
+    {
+      "id": 5,
+      "doc_file": "README.md",
+      "section": "Configuration / backoffMs (constraints)",
+      "parameter": "backoffMs (minimum)",
+      "issue_type": "Missing Constraint",
+      "severity": "High",
+      "documented_value": "(no minimum documented)",
+      "actual_value": "Minimum enforced: backoffMs >= 500 (throws if below)",
+      "citations": {
+        "doc": "README.md lines 13-16: (no minimum or constraint listed)",
+        "code": "input.ts lines 16 and 22-24: 'const backoffMs = options?.backoffMs ?? 1000;' and 'if (backoffMs < 500) { throw new Error("backoffMs must be at least 500ms"); }'"
+      },
+      "fix_summary": "Document the minimum allowed `backoffMs` (500ms) and that smaller values throw at runtime."
+    },
+    {
+      "id": 6,
+      "doc_file": "README.md",
+      "section": "Example",
+      "parameter": "example usage",
+      "issue_type": "Invalid Example",
+      "severity": "High",
+      "documented_value": "Example uses: maxRetries: 0, backoffMs: 100",
+      "actual_value": "Both values are rejected by code (maxRetries < 1 and backoffMs < 500)",
+      "citations": {
+        "doc": "README.md lines 20-24: the code example with 'maxRetries: 0' and 'backoffMs: 100'",
+        "code": "input.ts lines 18-20 and 22-24: checks that throw for invalid `maxRetries` and `backoffMs`"
+      },
+      "fix_summary": "Replace example with values that comply with code constraints (or show a failing example explicitly)."
+    }
+  ]
+}
