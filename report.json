@@ -1,0 +1,70 @@
+{
+  "summary": {
+    "total_issues": 4,
+    "high": 2,
+    "medium": 2,
+    "low": 0
+  },
+  "details": [
+    {
+      "id": 1,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "maxRetries",
+      "issue_type": "Incorrect Documentation",
+      "severity": "Medium",
+      "documented_value": "Default: 1",
+      "actual_value": "Default: 3",
+      "citations": {
+        "doc": "README.md, section 'Configuration', 'maxRetries' - 'Default: 1'",
+        "code": "input.ts, line 13: const maxRetries = options?.maxRetries ?? 3;"
+      },
+      "fix_summary": "Updated default from 1 to 3"
+    },
+    {
+      "id": 2,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "maxRetries",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "Range: 0–10",
+      "actual_value": "Range: 1–5",
+      "citations": {
+        "doc": "README.md, section 'Configuration', 'maxRetries' - 'Range: 0–10'",
+        "code": "input.ts, lines 15-16: if (maxRetries < 1 || maxRetries > 5) { throw new Error(\"maxRetries must be between 1 and 5\"); }"
+      },
+      "fix_summary": "Updated range from 0-10 to 1-5"
+    },
+    {
+      "id": 3,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "backoffMs",
+      "issue_type": "Incorrect Documentation",
+      "severity": "Medium",
+      "documented_value": "Default: 100",
+      "actual_value": "Default: 1000",
+      "citations": {
+        "doc": "README.md, section 'Configuration', 'backoffMs' - 'Default: 100'",
+        "code": "input.ts, line 14: const backoffMs = options?.backoffMs ?? 1000;"
+      },
+      "fix_summary": "Updated default from 100 to 1000"
+    },
+    {
+      "id": 4,
+      "doc_file": "README.md",
+      "section": "Configuration",
+      "parameter": "backoffMs",
+      "issue_type": "Incorrect Documentation",
+      "severity": "High",
+      "documented_value": "No minimum specified",
+      "actual_value": "Minimum: 500ms",
+      "citations": {
+        "doc": "README.md, section 'Configuration', 'backoffMs' - no mention of minimum",
+        "code": "input.ts, lines 18-19: if (backoffMs < 500) { throw new Error(\"backoffMs must be at least 500ms\"); }"
+      },
+      "fix_summary": "Added minimum constraint of 500ms"
+    }
+  ]
+}
