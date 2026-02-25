@@ -8,7 +8,7 @@ This utility executes an async task with retry support.
 - **Type:** number
 - **Range:** 1–5
 - **Default:** 3
-- **Description:** Maximum number of attempts (including the initial attempt). Must be between **1** and **5**. A value of **1** means the task is executed once with no retries. Passing a value outside this range will throw an Error.
+- Description: Number of retry attempts before failing.
 
 ### `backoffMs`
 - **Type:** number
